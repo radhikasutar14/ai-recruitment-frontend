@@ -23,6 +23,8 @@ const Navbar = () => {
                         <>
                             <Link to="/" className="hover:text-gray-300 transition">Home</Link>
                             <Link to="/candidate/dashboard" className="hover:text-gray-300 transition">My Applications</Link>
+                            <Link to="/saved-jobs" className="hover:text-gray-300 transition">Saved Jobs</Link>
+                            <Link to="/upload-resume" className="hover:text-gray-300 transition">Upload Resume</Link>
                         </>
                     )}
                     {user?.role == "recruiter" && (
