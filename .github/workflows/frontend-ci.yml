@@ -1,0 +1,35 @@
+name: Frontend CI
+
+on:
+  push:
+    brachnes:
+      - main
+
+  pull_request:
+    brachnes:
+      - main
+
+  jobs:
+    build:
+      runs-on: ubuntu-latest
+
+      steps:
+        - name: Checkout Repository
+          uses: actions/checkout@v4
+
+        - name: Setup Node
+          uses: actions/setup-node@v4
+          with:
+              node-version: 22
+
+        - name: Install Dependecies
+          run: npm install
+
+        - name: Run ESLint
+          run: npm run lint
+
+        - name: Build Application
+          run: npm run build
+
+        - name: Docker Build
+          run: docker build -t ats-frontend .
