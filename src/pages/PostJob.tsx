@@ -3,10 +3,20 @@ import { useNavigate } from "react-router-dom";
 import { createJob } from "../api/jobApi";
 import toast from "react-hot-toast";
 
+
+interface JobForm {
+  title: string;
+  company: string;
+  location: string;
+  description: string;
+  skills: string;
+  salary:string
+}
+
 const PostJob = () => {
     const navigate = useNavigate();
 
-    const [formData , setFormData] = useState({
+    const [formData , setFormData] = useState<JobForm>({
         title : "",
         company : "",
         location : "",

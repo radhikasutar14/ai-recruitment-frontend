@@ -1,7 +1,8 @@
 import api from "./axios";
+import type { JobsResponse ,CreateJobPayload } from "../types/job";
 
-export const getAllJobs = async() => {
-    const response = await api.get("/jobs")
+export const getAllJobs = async():Promise<JobsResponse> => {
+    const response = await api.get<JobsResponse>("/jobs")
 
     return response.data;
 }
@@ -14,14 +15,14 @@ export const getJobById = async(jobId : string) => {
 }
 
 //create job
-export const createJob = async(data : any) => {
+export const createJob = async(data : CreateJobPayload) => {
     const response = await api.post("/jobs/create" , data);
 
     return response.data;
 }
 
 //update job
-export const updateJob = async(data : any, jobId : string) => {
+export const updateJob = async(data : CreateJobPayload, jobId : string) => {
     const response = await api.put(`/jobs/${jobId}` , data);
 
     return response.data;

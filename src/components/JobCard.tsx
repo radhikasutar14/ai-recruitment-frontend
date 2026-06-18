@@ -1,7 +1,7 @@
 import useAuthStore from "../store/authStore"
 import { applyJob } from "../api/applicationApi";
 import { savedJob } from "../api/savedJobApi";
-import type { Job } from "../types/job";
+import type { JobCardProps } from "../types/job";
 import toast from "react-hot-toast";
 
 const JobCard = ({
@@ -9,7 +9,7 @@ const JobCard = ({
     title, 
     company,
     location,
-    skills} : Job) => {
+    skills} : JobCardProps) => {
     
     const { token , user} = useAuthStore();
 

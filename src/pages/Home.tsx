@@ -1,12 +1,12 @@
-import { useEffect, useState } from "react";
+import { useState , useEffect, useCallback} from "react";
 import { getAllJobs } from "../api/jobApi";
 import JobCard from "../components/JobCard";
-import type { Job } from "../types/job";
+import type { JobCardProps } from "../types/job";
 
 const Home = () => {
-    const [jobs, setJobs] = useState<Job[]>([])
+    const [jobs, setJobs] = useState<JobCardProps[]>([])
     
-    const fetchJob = async() => {
+    const fetchJob = useCallback(async() => {
         try{
             const response = await getAllJobs();
 
@@ -14,11 +14,11 @@ const Home = () => {
         }catch(error){
             console.log(error)
         }
-    }
+    },[])
 
     useEffect(() => {
         fetchJob()
-    },[]) 
+    },[fetchJob]) 
 
     return (
         <div className="min-h-screen bg-gray-200 p-8">
