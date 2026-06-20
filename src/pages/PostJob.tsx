@@ -2,6 +2,7 @@ import {  useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { createJob } from "../api/jobApi";
 import toast from "react-hot-toast";
+import { getErrorMessage } from "../utils/errorHandler";
 
 
 interface JobForm {
@@ -49,11 +50,8 @@ const PostJob = () => {
             toast.success(response.message);
 
             navigate("/recruiter-dashboard")
-        }catch(error: any){
-            console.log(error.response?.data);
-            toast.error(
-                error?.response?.data?.message || "Failed to create job"
-            );
+        }catch(error){
+            toast.error(getErrorMessage(error));
         }
     }
     return(

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { uploadResume } from "../api/userApi";
 import toast from "react-hot-toast";
+import { getErrorMessage } from "../utils/errorHandler";
 
 const ResumeUpload = () => {
     const [file , setFile] = useState<File | null>(null);
@@ -19,8 +20,8 @@ const ResumeUpload = () => {
             const response = await uploadResume(formData);
 
             toast.success(response.message)
-        }catch(error : any){
-            toast.error(error?.response?.data?.message || "Upload Failed");
+        }catch(error){
+            toast.error(getErrorMessage(error));
         }
     }
 

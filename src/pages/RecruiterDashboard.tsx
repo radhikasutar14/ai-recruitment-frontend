@@ -4,6 +4,7 @@ import { deleteJob, getAllJobs } from "../api/jobApi";
 import useAuthStore from "../store/authStore";
 import type { Job } from "../types/job";
 import toast from "react-hot-toast";
+import { getErrorMessage } from "../utils/errorHandler";
 
 const RecruiterDashboard = () => {
     const [jobs , setJobs] = useState<Job[]>([]);
@@ -33,7 +34,7 @@ const RecruiterDashboard = () => {
             setJobs(recruiterJobs)
             //setJobs(response.jobs)
         }catch(error){
-            console.log(error);
+             toast.error(getErrorMessage(error));
         }finally {
             setLoading(false);
         }
@@ -68,11 +69,11 @@ const RecruiterDashboard = () => {
     const handleDelete = async(id : string) => {
         try{
             await deleteJob(id);
-            setJobs((prev) => prev.filter((j : any) => j._id !== id))
+            setJobs((prev) => prev.filter((j) => j._id !== id))
 
             toast.success("Job deleted")
         }catch(error){
-            toast.error("Delete Failed")
+           toast.error(getErrorMessage(error));
         }
         
     }

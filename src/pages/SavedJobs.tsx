@@ -4,6 +4,7 @@ import { applyJob } from "../api/applicationApi";
 import useAuthStore from "../store/authStore";
 import type { Job } from "../types/job";
 import toast from "react-hot-toast";
+import { getErrorMessage } from "../utils/errorHandler";
 
 interface SavedJob {
     _id: string;
@@ -20,8 +21,8 @@ const SavedJob = () => {
             const response = await getSavedJobs();
 
             setSavedJob(response);
-        }catch(error : any){
-            toast.error(error?.response?.data?.message);
+        }catch(error){
+            toast.error(getErrorMessage(error));
         }finally{
             setLoading(false)
         }
@@ -36,8 +37,8 @@ const SavedJob = () => {
             setSavedJob((prev)=>
                 prev.filter((item) => item.job._id !== jobId))
 
-        }catch(error : any){
-            toast.error(error?.response?.data?.message);
+        }catch(error){
+            toast.error(getErrorMessage(error));
         }
     }
     
@@ -55,8 +56,8 @@ const SavedJob = () => {
             prev.filter((item) => item.job._id !== jobId)
         );
 
-        }catch(error : any){
-            toast.error(error?.response?.data?.message);
+        }catch(error){
+            toast.error(getErrorMessage(error));
         }
     }
 

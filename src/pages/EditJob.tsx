@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { getJobById, updateJob } from "../api/jobApi";
 import toast from "react-hot-toast";
+import { getErrorMessage } from "../utils/errorHandler";
 
 const EditJob = () => {
     const { jobId } = useParams();
@@ -28,9 +29,9 @@ const EditJob = () => {
                 skills : response.skills?.join(", ") || "",
                 salary : response.salary || ""
         })
-        }catch(error){[
-            console.log(error)
-        ]}
+        }catch(error){
+            toast.error(getErrorMessage(error));
+        }
     }
 
     useEffect(() => {
@@ -60,7 +61,7 @@ const EditJob = () => {
 
             navigate("/recruiter-dashboard")
         }catch(error){
-            toast.error("Failed to update job")
+            toast.error(getErrorMessage(error));
         }
     }
     return(

@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { getJobApplication, updateApplicationStatus } from "../api/applicationApi";
 import type { Application } from "../types/application";
 import toast from "react-hot-toast";
+import { getErrorMessage } from "../utils/errorHandler";
 
 const JobApplication = () =>{
 
@@ -17,7 +18,7 @@ const JobApplication = () =>{
             
             setApplications(data)
         }catch(error){
-            console.log(error)
+             toast.error(getErrorMessage(error));
         }
     }
 
@@ -35,7 +36,7 @@ const JobApplication = () =>{
 
             toast.success("Application status is updated")
         }catch(error){
-            toast.error("Failed to update application status")
+            toast.error(getErrorMessage(error));
         }
     }
     useEffect(() => {
