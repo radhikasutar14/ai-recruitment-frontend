@@ -3,6 +3,7 @@ import { applyJob } from "../api/applicationApi";
 import { savedJob } from "../api/savedJobApi";
 import type { JobCardProps } from "../types/job";
 import toast from "react-hot-toast";
+import { getErrorMessage } from "../utils/errorHandler";
 
 const JobCard = ({
     _id,
@@ -23,8 +24,8 @@ const JobCard = ({
             const response = await applyJob(_id, token)
 
             toast.success(response.message)
-        }catch(error : any){
-            toast.error(error?.response?.data?.message || "Something wnt wrong")
+        }catch(error){
+           toast.error(getErrorMessage(error));
         }
     }
     
@@ -33,8 +34,8 @@ const JobCard = ({
             const response = await savedJob(_id);
 
             toast.success(response.message)
-        }catch(error:any){
-            toast.error(error?.response?.data?.message || "Something wnt wrong")
+        }catch(error){
+            toast.error(getErrorMessage(error));
         }
     }
     return(
